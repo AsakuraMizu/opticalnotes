@@ -1,0 +1,43 @@
+:root {
+  /* Spacing for the container and between each toast */
+  --svoast-offset: 16px;
+  --svoast-gap: 16px;
+  /* The toast itself. */
+  --svoast-bg: #333;
+  --svoast-text: #fff;
+  --svoast-padding: 10px 5px 10px 5px;
+  --svoast-radius: 4px;
+  --svoast-shadow: 0 2px 7px hsl(0 0% 0% / 0.25);
+  --svoast-font-size: 14px;
+  --svoast-dismiss-gap: 8px;
+  --svoast-max-width: unset;
+  /* The current colour of the toast, depending on the type */
+  --svoast-colour: '';
+  /* Colour for each type */
+  --svoast-info-colour: #888;
+  --svoast-attention-colour: #38bdf8;
+  --svoast-success-colour: #4ade80;
+  --svoast-warning-colour: #fb923c;
+  --svoast-error-colour: #ef4444;
+  /* The coloured bar */
+  --svoast-bar-width: 0;
+  /* Icons */
+  --svoast-icon-padding: 2px;
+  --svoast-icon-size: 0;
+}
+
+html {
+  scroll-padding-top: 4.5rem;
+  scroll-behavior: smooth;
+}
+
+@media (min-width: 768px) {
+  html {
+    scroll-padding-top: 7.5rem;
+  }
+}
+
+.pswp img {
+  max-width: none;
+  object-fit: contain;
+}

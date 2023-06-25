@@ -1,0 +1,37 @@
+name: Deploy
+
+on: workflow_dispatch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'pnpm'
+      - name: Install dependencies
+        run: pnpm install
+      - name: Setup Alibaba Cloud CLI
+        uses: jerray/setup-aliyun-cli-action@v1.0.2
+        with:
+          aliyun-cli-version: '3.0.165'
+          mode: AK
+          access-key-id: ${{ secrets.ALIYUN_ACCESS_KEY_ID }}
+          access-key-secret: ${{ secrets.ALIYUN_ACCESS_KEY_SECRET }}
+          region: ${{ secrets.ALIYUN_REGION }}
+      - name: Build
+        run: |
+          aliyun oss sync ${{ secrets.ALIYUN_OSS_IMAGES_BUCKET_PATH }} src/images -f
+          pnpm autoupdate
+          pnpm build:site
+          mv build/404/index.html build/error.html && rm build/404 -r
+      - name: Deploy
+        run: |
+          aliyun oss sync build ${{ secrets.ALIYUN_OSS_WEBSITE_BUCKET_PATH }} --delete -f
+          aliyun cdn RefreshObjectCaches --ObjectPath ${{ secrets.ALIYUN_CDN_WEBSITE_URL }}
