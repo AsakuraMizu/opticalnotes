@@ -10,7 +10,7 @@ const updateGallery = async () => {
   const updateType = async (type: string) => {
     let result: string[] = [];
     const files = (await glob(join(__dirname, 'images', type, '*.jpg'))).sort((a, b) =>
-      a.localeCompare(b, undefined, { numeric: true })
+      b.localeCompare(a, undefined, { numeric: true })
     );
     for (let path of files) {
       const base = basename(path, '.jpg');
