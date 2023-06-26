@@ -25,12 +25,10 @@ jobs:
           access-key-id: ${{ secrets.ALIYUN_ACCESS_KEY_ID }}
           access-key-secret: ${{ secrets.ALIYUN_ACCESS_KEY_SECRET }}
           region: ${{ secrets.ALIYUN_REGION }}
+      - name: Sync
+        run: aliyun oss sync ${{ secrets.ALIYUN_OSS_IMAGES_BUCKET_PATH }} src/images -f
       - name: Build
-        run: |
-          aliyun oss sync ${{ secrets.ALIYUN_OSS_IMAGES_BUCKET_PATH }} src/images -f
-          pnpm autoupdate
-          pnpm build:site
-          mv build/404/index.html build/error.html && rm build/404 -r
+        run: ./build.sh
       - name: Deploy
         run: |
           aliyun oss sync build ${{ secrets.ALIYUN_OSS_WEBSITE_BUCKET_PATH }} --delete -f
