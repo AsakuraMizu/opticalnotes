@@ -13,8 +13,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "pret": "prettier --plugin-search-dir=. --check .",
-    "pret:fix": "prettier --plugin-search-dir=. --write .",
-    "autoupdate": "tsx src/autoupdate.cts"
+    "pret:fix": "prettier --plugin-search-dir=. --write ."
   },
   "devDependencies": {
     "@iconify-json/carbon": "^1.1.18",
