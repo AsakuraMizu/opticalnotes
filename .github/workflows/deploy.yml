@@ -26,7 +26,7 @@ jobs:
           access-key-secret: ${{ secrets.ALIYUN_ACCESS_KEY_SECRET }}
           region: ${{ secrets.ALIYUN_REGION }}
       - name: Sync
-        run: aliyun oss sync ${{ secrets.ALIYUN_OSS_IMAGES_BUCKET_PATH }} src/images -f
+        run: aliyun oss sync ${{ secrets.ALIYUN_OSS_IMAGES_BUCKET_PATH }} opticalnotes-images -f
       - name: Build
         run: ./build.sh
       - name: Deploy
