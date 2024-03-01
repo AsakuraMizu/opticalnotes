@@ -1,9 +1,4 @@
-# generate .svelte-kit
-pnpm dev &
-command_pid=$!
-sleep 3
-kill "$command_pid"
-
+pnpm svelte-kit sync
 pnpm tsx src/update.cts
 pnpm build:site
 mv build/404/index.html build/error.html

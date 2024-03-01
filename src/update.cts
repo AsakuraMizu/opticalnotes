@@ -8,11 +8,11 @@ const updateGallery = async () => {
   let src = await readFile(gallery, { encoding: 'utf-8' });
 
   const updateType = async (type: string) => {
-    let result: string[] = [];
+    const result: string[] = [];
     const files = (await glob(join(__dirname, 'images', type, '*.jpg'))).sort((a, b) =>
       b.localeCompare(a, undefined, { numeric: true })
     );
-    for (let path of files) {
+    for (const path of files) {
       const base = basename(path, '.jpg');
       const image = loadImage(path);
       const metadata = await image.metadata();
